@@ -8,16 +8,14 @@
 Для примера используется приложение JupyterHub.
 
 ### Плохий Dockerfile
-[BAD_DOCKERFILE](../lab1/lab1_bad/Dockerfile)
-
-[shell](./images/bad_powershell.png)
-[browser](./images/good_browser.png)
+![Screenshot 2024-05-18 224053](https://github.com/boodscode237/containers_in_docker/assets/65740750/8f358790-a8d0-4c72-923d-c59336d9182c)
 
 
 ### Хороший Dockerfile
-[BAD_DOCKERFILE](../lab1/lab1_good/Dockerfile)
 
-[shell](./images/bad_powershell.png)
+
+![Screenshot 2024-05-18 223656](https://github.com/boodscode237/containers_in_docker/assets/65740750/9fcf7c87-6874-4dde-a47e-1a3dc4b4a6d2)
+![Screenshot 2024-05-18 222146](https://github.com/boodscode237/containers_in_docker/assets/65740750/7ab45f7c-4ee9-47eb-bcbe-de8825c2c0d9)
 
 ### Хорошие практики
 1. Объединение RUN команд: Объединение всех установок в один слой уменьшает размер образа и ускоряет его сборку.
