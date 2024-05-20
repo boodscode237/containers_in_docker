@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  jupyter:
+    build: ./jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupyter:/app
+    depends_on:
+      - postgres
+    entrypoint:
+      jupyter lab --ip="0.0.0.0" --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
+
+  postgres:
+    image: "postgres:14"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres"
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: "dpage/pgadmin4:latest"
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "user@domain.com"
+      PGADMIN_DEFAULT_PASSWORD: "SecretPassword"
+      volumes:
+        pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  db-data:
+  pgadmin-data:
