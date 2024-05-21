@@ -1,0 +1,17 @@
+# Хороший Dockerfile
+
+FROM jupyterhub/jupyterhub:3.1.1
+
+# Объединение установки зависимостей в один слой и удаление ненужных файлов
+RUN apt update && apt -y install python3-dev git vim nano && \
+    apt clean && rm -rf /var/lib/apt/lists/*
+
+# Создание и использование непривилегированного пользователя
+RUN useradd -ms /bin/bash jupyter
+USER jupyter
+
+# Установка рабочего каталога внутри контейнера
+WORKDIR /home/jupyter
+
+# Запуск приложения
+ENTRYPOINT ["jupyterhub", "--log-level=DEBUG"]
