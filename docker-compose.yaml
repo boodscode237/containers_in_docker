@@ -22,8 +22,8 @@ services:
       - mynetwork
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8888"]
-      interval: 30s
-      timeout: 10s
+      interval: 1m
+      timeout: 20s
       retries: 5
     deploy:
       resources:
@@ -63,8 +63,8 @@ services:
       - mynetwork
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/pgadmin"]
-      interval: 30s
-      timeout: 10s
+      interval: 1m
+      timeout: 20s
       retries: 5
 
 volumes:
