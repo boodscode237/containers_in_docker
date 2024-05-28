@@ -1,10 +1,10 @@
 import os
 c = get_config()
 # Kernel config
-c.IPKernelApp.pylab = 'inline'
+c.IPKernelApp.pylab = 'inline'  # if you want plotting support always in your notebook
 # Notebook config
 c.NotebookApp.notebook_dir = 'nbs'
-c.NotebookApp.allow_origin = u'https://inprof-chat.web.app/'
+c.NotebookApp.allow_origin = u'https://inprof-chat.web.app/' # put your public IP Address here
 c.NotebookApp.ip = '*'
 c.NotebookApp.allow_remote_access = True
 c.NotebookApp.open_browser = False

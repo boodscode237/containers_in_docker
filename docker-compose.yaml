@@ -10,30 +10,67 @@ services:
     depends_on:
       - postgres
     entrypoint:
-      jupyter lab --ip="0.0.0.0" --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
+      - "jupyter"
+      - "lab"
+      - "--ip=0.0.0.0"
+      - "--port=8888"
+      - "--no-browser"
+      - "--allow-root"
+      - "--NotebookApp.token=''"
+      - "--NotebookApp.password=''"
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "512M"
 
   postgres:
     image: "postgres:14"
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: "postgres"
-      PGDATA: /var/lib/postgresql/data
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - PGDATA
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   pgadmin:
     image: "dpage/pgadmin4:latest"
     ports:
       - "80:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: "user@domain.com"
-      PGADMIN_DEFAULT_PASSWORD: "SecretPassword"
-      volumes:
-        pgadmin-data:/var/lib/pgadmin
+      - PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/pgadmin"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 volumes:
   db-data:
   pgadmin-data:
+
+networks:
+  mynetwork:
+    driver: bridge

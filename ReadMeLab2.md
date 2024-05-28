@@ -1,4 +1,4 @@
-## Описание композ файла
+# Описание композ файла
 
 В этом репозитории содержится файл docker-compose.yaml, который позволяет запустить три службы: Jupyter, PostgreSQL и pgAdmin.
 
@@ -66,12 +66,20 @@ cursor = conn.cursor()
 cursor.execute('select * from russian_towns;')
 cursor.fetchall()
 ```
-2. Result
-
+2. Results
+- First
 ![img.png](img.png)
+- Second
+![img_1.png](img_1.png)
 
 **Подключение к pgAdmin**
 
 * Адрес: http://localhost
 * Логин: user@domain.com
 * Пароль: SecretPassword
+
+## Файлы
+
+- `docker-compose.yml`: Файл конфигурации Docker Compose.
+- `.env`: Переменные окружения для сервисов.
+- `answers.md`: Ответы на вопросы лабораторной работы.
