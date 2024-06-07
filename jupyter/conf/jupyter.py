@@ -16,4 +16,4 @@ c.NotebookApp.port = int(os.environ.get("PORT", 8888))
 c.NotebookApp.allow_root = True
 c.NotebookApp.allow_password_change = True
 c.ConfigurableHTTPProxy.command = ['configurable-http-proxy', '--redirect-port', '80']
-c.JupyterHub.db_url = 'postgresql://postgres:postgres@postgres:5432/postgres'
+c.JupyterHub.db_url = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@postgres:5432/{os.environ['POSTGRES_DB']}"
