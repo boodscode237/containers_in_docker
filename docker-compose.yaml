@@ -35,11 +35,13 @@ services:
     image: "postgres:14"
     ports:
       - "5432:5432"
+    env_file:
+      .env
     environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - PGDATA
+      - ${POSTGRES_USER}
+      - ${POSTGRES_PASSWORD}
+      - ${POSTGRES_DB}
+      - ${PGDATA}
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
@@ -54,9 +56,11 @@ services:
     image: "dpage/pgadmin4:latest"
     ports:
       - "80:80"
+    env_file:
+      .env
     environment:
-      - PGADMIN_DEFAULT_EMAIL
-      - PGADMIN_DEFAULT_PASSWORD
+      - ${PGADMIN_DEFAULT_EMAIL}
+      - ${PGADMIN_DEFAULT_PASSWORD}
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     networks:
